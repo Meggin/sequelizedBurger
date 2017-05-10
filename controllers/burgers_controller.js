@@ -2,14 +2,14 @@ var express = require("express");
 
 var router = express.Router();
 
-// Import the model (burger.js) to use its database functions.
-var burger = require("../models/burger.js");
+// Import the models
+var db = require("../models");
 
 // Get all burgers in burger database and render on page.
 router.get("/", function(req, res) {
-  burger.selectAll(function(data) {
+  db.Burger.findAll({}).then(function(results) {
     var hbsObject = {
-      burgers: data
+      burgers: results
     };
     console.log(hbsObject);
     res.render("index", hbsObject);
@@ -18,11 +18,9 @@ router.get("/", function(req, res) {
 
 // Post new burger to database and refesh page to see it.
 router.post("/", function(req, res) {
-  burger.insertOne([
-    "burger_name", "devoured"
-  ], [
-    req.body.burger_name, req.body.devoured
-  ], function() {
+  db.Burger.create({
+    burger_name: req.body.burger_name
+  }).then(function(){
     res.redirect("/");
   });
 });
@@ -30,13 +28,14 @@ router.post("/", function(req, res) {
 // Mark burger as devoured in database.
 // Refresh page to move it to devoured list.
 router.put("/:id", function(req, res) {
-  var condition = "id = " + req.params.id;
 
-  console.log("condition", condition);
-
-  burger.updateOne({
+  db.Burger.update({
     devoured: req.body.devoured
-  }, condition, function() {
+  }, {
+    where: {
+      id: req.params.id
+    }
+  }).then(function() {
     res.redirect("/");
   });
 });
