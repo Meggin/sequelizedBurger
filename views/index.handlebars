@@ -15,6 +15,7 @@
             </span>
             <span id="devour-button">
               <form action="/{{this.id}}?_method=PUT" method="POST">
+                <input placeholder="Customer?" name="customer_name" type="text" />
                 <input type="hidden" name="devoured" value="true">
                 <button class="devour-button" type="submit">Devour it!</button>
               </form>
@@ -31,6 +32,7 @@
           <li class="devour-burger">
             {{this.id}}
             {{this.burger_name}}
+            Eaten by {{this.Customer.customer_name}}.
           </li>
         {{/if}}
       {{/each}}

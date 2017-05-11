@@ -7,12 +7,14 @@ var db = require("../models");
 
 // Get all burgers in burger database and render on page.
 router.get("/", function(req, res) {
-  db.Burger.findAll({}).then(function(results) {
-    var hbsObject = {
+  db.Burger.findAll({
+    include: [db.Customer]
+  }).then(function(results) {
+    var hbsBurgerObject = {
       burgers: results
     };
-    console.log(hbsObject);
-    res.render("index", hbsObject);
+    console.log("Burger object: " + hbsBurgerObject);
+    res.render("index", hbsBurgerObject);
   });
 });
 
@@ -29,14 +31,23 @@ router.post("/", function(req, res) {
 // Refresh page to move it to devoured list.
 router.put("/:id", function(req, res) {
 
+  console.log("Customer name is here: " + req.body.customer_name);
+
+  var customer = req.body.customer_name;
+
   db.Burger.update({
     devoured: req.body.devoured
   }, {
     where: {
-      id: req.params.id
+      id: req.params.id,
     }
   }).then(function() {
-    res.redirect("/");
+    db.Customer.create({
+      customer_name: customer,
+      BurgerId: req.params.id
+    }).then(function() {
+      res.redirect("/");
+    });
   });
 });
 
