@@ -9,6 +9,10 @@ header {
 	color: red;
 }
 
+form {
+	margin-bottom: -25px;
+}
+
 li {
   list-style: none;
 }
@@ -43,9 +47,16 @@ span {
 	vertical-align: top;
 }
 
+#customer-style {
+	width: 70%;
+	display: block;
+	margin-bottom: 3%;
+}
+
 #devour-button {
 	position: relative;
-	bottom: -14px;
+	bottom: 50px;
+	left: 76%;
 	margin-left: 4%;
 }
 
@@ -74,15 +85,12 @@ span {
 	left: 25%;
 }
 
-.available-burger {
-}
-
 .burgers {
 	width:	70%;
 	background: white;
 	padding-left: 5%;
-	padding-top: 1%;
-	padding-bottom: 2%;
+	padding-top: 3%;
+	padding-bottom: 5%;
 	margin: 1%;
 }
 
@@ -114,6 +122,7 @@ span {
   is 640px or less.
 */
 @media screen and (max-width: 640px) {
+	
 	header {
 		font-size: 35px;
 	}
@@ -126,25 +135,22 @@ span {
 	}
 
 	section {
-		width: 100%;
+		width: 70%;
+		margin-left: -6%;
 	}
 
 	#burger-list {
 		margin-left: 0;
 	}
 
-	/* Hide devoured list on mobile for better user experience. */
-	#devoured-hamburgers {
-		display: none;
-	}
-
 	#hamburger-image {
 		width: 50%;
-		left: 25%;
+		left: 17%;
 	}
 
 	#new-burger {
-		width: 100%;
+		width: 80%;
+		margin-left: 18%;
 	}
 
 	#new-burger-submit {
@@ -175,13 +181,14 @@ span {
 		right: 24%;
 	}
 
+	.devour-burger {
+		width: 107%;
+		font-size: 20px;
+	}
+
 	.devour-button {
 		background-color: #4e91fd;
 		color: white;
-		font-size: 20px;
-		margin-left: -13px;
-		margin-top: -18px;
-		margin-bottom: 17px;
 	}
 
 	.form-group {

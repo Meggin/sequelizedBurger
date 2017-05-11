@@ -8,6 +8,7 @@ var db = require("../models");
 // Get all burgers in burger database and render on page.
 router.get("/", function(req, res) {
   db.Burger.findAll({
+    // Include the associated customer.
     include: [db.Customer]
   }).then(function(results) {
     var hbsBurgerObject = {
@@ -28,6 +29,7 @@ router.post("/", function(req, res) {
 });
 
 // Mark burger as devoured in database.
+// Post customer to database and associate it with burger.
 // Refresh page to move it to devoured list.
 router.put("/:id", function(req, res) {
 
@@ -42,6 +44,7 @@ router.put("/:id", function(req, res) {
       id: req.params.id,
     }
   }).then(function() {
+    // Post customer to database and associate it with burger.
     db.Customer.create({
       customer_name: customer,
       BurgerId: req.params.id

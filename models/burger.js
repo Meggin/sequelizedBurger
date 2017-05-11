@@ -16,7 +16,7 @@ module.exports = function(sequelize, DataTypes) {
       classMethods: {
         associate: function(models) {
           // Associating Burger with Customer.
-          // When a Burger is deleted, also delete any associated Posts
+          // When a Burger is deleted, set the customer to null.
           Burger.hasOne(models.Customer, {
             onDelete: "set null"
           });
